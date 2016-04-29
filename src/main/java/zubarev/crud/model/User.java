@@ -1,28 +1,54 @@
 package zubarev.crud.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Admin on 28.04.2016.
  */
 @Entity
-@Table(name = "user1")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "name", nullable = false)
     private String name;
+    @Column(name = "age", nullable = false)
+    private int age;
+    @Column(name = "isAdmin", nullable = false)
+    private boolean isAdmin;
+    @Column(name = "createdDate", nullable = false)
+    private Date createDate;
 
     public User() {
     }
 
-    public User(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public int getAge() {
+        return age;
     }
 
-    public long getId() {
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public Date getCreatedDate() {
+        return createDate;
+    }
+
+    public void setCreatedDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public int getId() {
         return id;
     }
 
@@ -46,14 +72,20 @@ public class User {
         User user = (User) o;
 
         if (id != user.id) return false;
-        return name.equals(user.name);
+        if (age != user.age) return false;
+        if (isAdmin != user.isAdmin) return false;
+        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        return createDate != null ? createDate.equals(user.createDate) : user.createDate == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + age;
+        result = 31 * result + (isAdmin ? 1 : 0);
+        result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
         return result;
     }
 
@@ -62,6 +94,9 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", age=" + age +
+                ", isAdmin=" + isAdmin +
+                ", createDate=" + createDate +
                 '}';
     }
 }

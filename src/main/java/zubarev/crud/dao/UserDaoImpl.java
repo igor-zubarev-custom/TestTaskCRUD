@@ -1,6 +1,7 @@
 package zubarev.crud.dao;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,13 +17,6 @@ import java.util.List;
 @Transactional
 @Repository
 public class UserDaoImpl extends BaseDao<Integer, User> implements UserDao {
-    /*private static List<User> users;
-    static {
-        users = new ArrayList<User>();
-        users.add(new User(1, "name1"));
-        users.add(new User(2, "name2"));
-        users.add(new User(3, "name3"));
-    }*/
 
     @Override
     public List<User> getAllUsers() {
@@ -35,14 +29,27 @@ public class UserDaoImpl extends BaseDao<Integer, User> implements UserDao {
         return getByKey(id);
     }
 
-    /*@Override
-    public List<User> findByName(String name) {
-        List<User> result = new ArrayList<>();
-        for (User user :users) {
-            if (user.getName().equalsIgnoreCase(name)){
-                result.add(user);
-            }
+    @Override
+    public void saveUser(User user) {
+        persist(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        User result = getByKey(user.getId());
+        if (result != null) {
+            result.setId(user.getId());
+            result.setName(user.getName());
+            result.setAge(user.getAge());
+            result.setCreatedDate(user.getCreatedDate());
         }
-        return result;
-    }*/
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        Criteria criteria = createUserCriteria();
+        criteria.add(Restrictions.eq("id", id));
+        User user = (User) criteria.uniqueResult();
+        delete(user);
+    }
 }

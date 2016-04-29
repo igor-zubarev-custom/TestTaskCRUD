@@ -1,12 +1,11 @@
 package zubarev.crud.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import zubarev.crud.model.User;
 import zubarev.crud.dao.UserDao;
 
@@ -38,13 +37,39 @@ public class UserRestController  {
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
-    /*@RequestMapping(value = "/user/name/{name}", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> usersByName(@PathVariable("name") String name){
-        List<User> users = userDao.findByName(name);
-        if (users.isEmpty()){
-            return new ResponseEntity<List<User>>(HttpStatus.NOT_FOUND);
+    @RequestMapping(value = "/user/", method = RequestMethod.POST)
+    public ResponseEntity<Void> createNewUser(@RequestBody User user, UriComponentsBuilder uriComponentsBuilder){
+        System.out.println("Create user " + user);
+        userDao.saveUser(user);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setLocation(uriComponentsBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
+        return new ResponseEntity<Void>(httpHeaders, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<User> updateUser(@PathVariable("id") int id, @RequestBody User user){
+        System.out.println("Update user " + user);
+        User updateUser = userDao.findById(id);
+        if (updateUser == null){
+            System.out.println("User " + user + " not found in DB");
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
-    }*/
+        updateUser.setName(user.getName());
+        updateUser.setAge(user.getAge());
+        userDao.updateUser(updateUser);
+        return new ResponseEntity<User>(updateUser, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<User> deleteUser(@PathVariable("id") int id){
+        System.out.println("Delete user " + id);
+        User deleteUser = userDao.findById(id);
+        if (deleteUser == null){
+            System.out.println("User " + id + " not found in DB");
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }
+        userDao.deleteUser(id);
+        return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
+    }
 
 }
