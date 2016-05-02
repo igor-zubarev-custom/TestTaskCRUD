@@ -24,8 +24,8 @@
           background-color: yellow;
       }
     </style>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
      <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
+     <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"/>
      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
   </head>
@@ -87,7 +87,7 @@
                           <div class="form-actions floatRight">
                               <input type="submit"  value="{{!ctrl.user.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
                               <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
-                              <button type="button" ng-click="ctrl.generateAllUsers()" class="btn btn-primary btn-sm">GenerateUsers</button>
+                              <button type="button" ng-click="ctrl.generateAllUsers()" class="btn btn-primary btn-sm">Generate Users</button>
                           </div>
                       </div>
                   </form>
@@ -109,7 +109,6 @@
               </form>
 
               <table class="table table-bordered table-striped">
-
                   <thead>
                   <tr>
                       <td>
@@ -151,25 +150,23 @@
                   </thead>
 
                   <tbody>
-                 <%-- <tr ng-repeat="u in ctrl.users | orderBy:sortType:sortReverse | filter:searchUser">--%>
-                  <tr dir-paginate="u in ctrl.users | orderBy:sortType:sortReverse | filter:searchUser | itemsPerPage:10">
-                      <td>{{ u.id }}</td>
-                      <td>{{ u.name }}</td>
-                      <td>{{ u.age }}</td>
-                      <td>{{ u.admin ? 'ADMIN' : 'USER' }}</td>
-                      <td>{{ u.createdDate | date:'yyyy-MM-dd HH:mm:ss' }}</td>
-                      <td>
-                          <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Remove</button>
-                      </td>
-                  </tr>
-                  <tr>
-                      <dir-pagination-controls
-                              max-size="10"
-                              direction-links="true"
-                              boundary-links="true" >
-                      </dir-pagination-controls>
-                  </tr>
-
+                      <tr dir-paginate="u in ctrl.users | orderBy:sortType:sortReverse | filter:searchUser | itemsPerPage:10">
+                          <td>{{ u.id }}</td>
+                          <td>{{ u.name }}</td>
+                          <td>{{ u.age }}</td>
+                          <td>{{ u.admin ? 'ADMIN' : 'USER' }}</td>
+                          <td>{{ u.createdDate | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                          <td>
+                              <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Remove</button>
+                          </td>
+                      </tr>
+                      <tr>
+                          <dir-pagination-controls
+                                  max-size="10"
+                                  direction-links="true"
+                                  boundary-links="true" >
+                          </dir-pagination-controls>
+                      </tr>
                   </tbody>
               </table>
           </div>

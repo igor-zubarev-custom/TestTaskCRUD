@@ -12,7 +12,7 @@ import zubarev.crud.dao.UserDao;
 import java.util.List;
 
 /**
- * Created by Admin on 28.04.2016.
+ * Created by IGor on 28.04.2016.
  */
 @RestController
 public class UserRestController  {
@@ -64,8 +64,6 @@ public class UserRestController  {
             System.out.println("User " + user + " not found in DB");
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
-       /* updateUser.setName(user.getName());
-        updateUser.setAge(user.getAge());*/
         userDao.updateUser(user);
         return new ResponseEntity<User>(HttpStatus.OK);
     }

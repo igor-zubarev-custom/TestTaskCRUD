@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by Admin on 28.04.2016.
+ * Created by IGor on 28.04.2016.
  */
 @Service("userDao")
 @Transactional

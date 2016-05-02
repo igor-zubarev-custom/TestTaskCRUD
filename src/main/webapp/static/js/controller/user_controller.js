@@ -5,9 +5,9 @@ App.controller('UserController', ['$scope', 'UserService', function($scope, User
           self.user={id:null,name:'',age:null,admin:false,createdDate:0};
           self.users=[];
 
-          self.sortType     = 'name'; // set the default sort type
-          self.sortReverse  = false;  // set the default sort order
-          self.searchUser   = '';     // set the default search/filter term
+          self.sortType     = 'name';  //Сортировка по умолчанию
+          self.sortReverse  = false;
+          self.searchUser   = '';
 
           self.fetchAllUsers = function(){
               UserService.fetchAllUsers()
@@ -16,7 +16,7 @@ App.controller('UserController', ['$scope', 'UserService', function($scope, User
       						        self.users = d;
       					       },
             					function(errResponse){
-            						console.error('Error while fetching Currencies');
+            						console.error('Error while fetching Users');
             					}
       			       );
           };
@@ -28,7 +28,7 @@ App.controller('UserController', ['$scope', 'UserService', function($scope, User
       						        self.users = d;
       					       },
             					function(errResponse){
-            						console.error('Error while fetching Currencies');
+            						console.error('Error while generate Users');
             					}
       			       );
           };
@@ -90,16 +90,16 @@ App.controller('UserController', ['$scope', 'UserService', function($scope, User
               
           self.remove = function(id){
               console.log('id to be deleted', id);
-              if(self.user.id === id) {//clean form if the user to be deleted is shown there.
+              if(self.user.id === id) {
                  self.reset();
               }
               self.deleteUser(id);
           };
 
-          
+          //Сброс формы
           self.reset = function(){
               self.user={id:null,name:'',age:null,admin:false,createdDate:0};
-              $scope.myForm.$setPristine(); //reset Form
+              $scope.myForm.$setPristine();
           };
 
       }]);

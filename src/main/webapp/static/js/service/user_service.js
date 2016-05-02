@@ -24,7 +24,7 @@ App.factory('UserService', ['$http', '$q', function($http, $q){
 										return response.data;
 									},
 									function(errResponse){
-										console.error('Error while fetching users');
+										console.error('Error while generate users');
 										return $q.reject(errResponse);
 									}
 							);
