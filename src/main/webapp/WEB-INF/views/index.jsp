@@ -151,7 +151,8 @@
                   </thead>
 
                   <tbody>
-                  <tr ng-repeat="u in ctrl.users | orderBy:sortType:sortReverse | filter:searchUser">
+                 <%-- <tr ng-repeat="u in ctrl.users | orderBy:sortType:sortReverse | filter:searchUser">--%>
+                  <tr dir-paginate="u in ctrl.users | orderBy:sortType:sortReverse | filter:searchUser | itemsPerPage:10">
                       <td>{{ u.id }}</td>
                       <td>{{ u.name }}</td>
                       <td>{{ u.age }}</td>
@@ -161,6 +162,14 @@
                           <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Remove</button>
                       </td>
                   </tr>
+                  <tr>
+                      <dir-pagination-controls
+                              max-size="10"
+                              direction-links="true"
+                              boundary-links="true" >
+                      </dir-pagination-controls>
+                  </tr>
+
                   </tbody>
               </table>
           </div>
@@ -171,5 +180,6 @@
       <script src="<c:url value='/static/js/app.js' />"></script>
       <script src="<c:url value='/static/js/service/user_service.js' />"></script>
       <script src="<c:url value='/static/js/controller/user_controller.js' />"></script>
+      <script src="<c:url value='/static/js/controller/dirPagination.js' />"></script>
   </body>
 </html>
