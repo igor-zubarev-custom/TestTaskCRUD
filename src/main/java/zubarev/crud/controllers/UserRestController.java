@@ -28,6 +28,15 @@ public class UserRestController  {
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/user/gen/", method = RequestMethod.GET)
+    public ResponseEntity<List<User>> generateUsers(){
+        List<User> users = userDao.generateAllUsers();
+        if (users.isEmpty()){
+            return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public ResponseEntity<User> userById(@PathVariable("id") int id){
         User user = userDao.findById(id);

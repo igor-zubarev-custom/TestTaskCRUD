@@ -87,6 +87,7 @@
                           <div class="form-actions floatRight">
                               <input type="submit"  value="{{!ctrl.user.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
                               <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                              <button type="button" ng-click="ctrl.generateAllUsers()" class="btn btn-primary btn-sm">GenerateUsers</button>
                           </div>
                       </div>
                   </form>

@@ -11,14 +11,15 @@ import java.util.Date;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, columnDefinition = "INT(8)")
     private int id;
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, columnDefinition = "VARCHAR(25)")
     private String name;
-    @Column(name = "age", nullable = false)
+    @Column(name = "age", nullable = false, columnDefinition = "INT")
     private int age;
-    @Column(name = "isAdmin", nullable = false)
+    @Column(name = "isAdmin", nullable = false, columnDefinition = "BIT")
     private boolean isAdmin;
-    @Column(name = "createdDate", nullable = false)
+    @Column(name = "createdDate", nullable = false, columnDefinition = "TIMESTAMP")
     private Date createDate;
 
     public User() {

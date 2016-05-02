@@ -20,6 +20,18 @@ App.controller('UserController', ['$scope', 'UserService', function($scope, User
             					}
       			       );
           };
+
+          self.generateAllUsers = function(){
+              UserService.generateAllUsers()
+                  .then(
+      					       function(d) {
+      						        self.users = d;
+      					       },
+            					function(errResponse){
+            						console.error('Error while fetching Currencies');
+            					}
+      			       );
+          };
            
           self.createUser = function(user){
               user.createdDate = new Date();

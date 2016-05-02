@@ -10,6 +10,7 @@ import java.util.List;
 public interface UserDao {
 
     List<User> getAllUsers();
+    List<User> generateAllUsers();
     User findById(int id);
     void saveUser(User user);
     void updateUser(User user);
