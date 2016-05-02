@@ -41,7 +41,9 @@ public class UserDaoImpl extends BaseDao<Integer, User> implements UserDao {
             result.setId(user.getId());
             result.setName(user.getName());
             result.setAge(user.getAge());
-            result.setCreatedDate(user.getCreatedDate());
+            result.setAdmin(user.isAdmin());
+            //При изменении дату менять не стал
+            //result.setCreatedDate(user.getCreatedDate());
         }
     }
 

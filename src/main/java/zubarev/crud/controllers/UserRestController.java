@@ -50,14 +50,15 @@ public class UserRestController  {
     public ResponseEntity<User> updateUser(@PathVariable("id") int id, @RequestBody User user){
         System.out.println("Update user " + user);
         User updateUser = userDao.findById(id);
+        System.out.println(">>>>find " + updateUser);
         if (updateUser == null){
             System.out.println("User " + user + " not found in DB");
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
-        updateUser.setName(user.getName());
-        updateUser.setAge(user.getAge());
-        userDao.updateUser(updateUser);
-        return new ResponseEntity<User>(updateUser, HttpStatus.OK);
+       /* updateUser.setName(user.getName());
+        updateUser.setAge(user.getAge());*/
+        userDao.updateUser(user);
+        return new ResponseEntity<User>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)

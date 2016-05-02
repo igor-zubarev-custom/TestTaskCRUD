@@ -5,6 +5,10 @@ App.controller('UserController', ['$scope', 'UserService', function($scope, User
           self.user={id:null,name:'',age:null,admin:false,createdDate:0};
           self.users=[];
 
+          self.sortType     = 'name'; // set the default sort type
+          self.sortReverse  = false;  // set the default sort order
+          self.searchUser   = '';     // set the default search/filter term
+
           self.fetchAllUsers = function(){
               UserService.fetchAllUsers()
                   .then(
@@ -18,6 +22,7 @@ App.controller('UserController', ['$scope', 'UserService', function($scope, User
           };
            
           self.createUser = function(user){
+              user.createdDate = new Date();
               UserService.createUser(user)
 		              .then(
                       self.fetchAllUsers, 
@@ -28,6 +33,7 @@ App.controller('UserController', ['$scope', 'UserService', function($scope, User
           };
 
          self.updateUser = function(user, id){
+              user.createdDate = new Date();
               UserService.updateUser(user, id)
 		              .then(
 				              self.fetchAllUsers, 
