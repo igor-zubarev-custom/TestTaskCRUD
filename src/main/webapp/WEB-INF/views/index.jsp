@@ -103,7 +103,7 @@
                   <div class="form-group">
                       <div class="input-group">
                           <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                          <input type="text" class="form-control" placeholder="Search users for name or age" ng-model="searchUser">
+                          <input type="text" class="form-control" placeholder="Search users for name" ng-model="searchUser">
                       </div>
                   </div>
               </form>
